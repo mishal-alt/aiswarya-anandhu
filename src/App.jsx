@@ -8,6 +8,7 @@ import {
   useTransform as Ng,
 } from "framer-motion";
 import Credit from "./Credit";
+import { startMusic, preloadMusic, MusicToggle } from "./Music";
 
 var Rg = (...e) =>
   e
@@ -1009,6 +1010,7 @@ function g_() {
       }),
       (0, O.jsx)(`div`, {
         className: `text-ivory/50 relative mt-3 text-center text-[10px] uppercase tracking-[0.35em]`,
+        style: { paddingBottom: `calc(52px + env(safe-area-inset-bottom))` },
         children: (0, O.jsx)(Credit, {}),
       }),
     ],
@@ -1016,6 +1018,7 @@ function g_() {
 }
 function __({ onOpen: e }) {
   let [t, n] = (0, b.useState)(!1);
+  (0, b.useEffect)(() => preloadMusic(), []);
   return (0, O.jsxs)(Q.div, {
     className: `fixed inset-0 z-50 flex items-center justify-center overflow-hidden`,
     exit: { opacity: 0 },
@@ -1081,7 +1084,7 @@ function __({ onOpen: e }) {
               (0, O.jsx)(`span`, { className: `rule-gold mt-6 w-32` }),
               (0, O.jsxs)(Q.button, {
                 onClick: () => {
-                  t || (n(!0), window.setTimeout(e, 1500));
+                  t || (n(!0), startMusic(), window.setTimeout(e, 1500));
                 },
                 whileTap: { scale: 0.92 },
                 whileHover: { scale: 1.05 },
@@ -1152,6 +1155,7 @@ function S_() {
           children: !e && (0, O.jsx)(__, { onOpen: () => t(!0) }, `opener`),
         }),
         e && (0, O.jsx)(v_, {}),
+        e && (0, O.jsx)(MusicToggle, {}),
         (0, O.jsxs)(Q.main, {
           initial: { opacity: 0, scale: 1.03 },
           animate: e ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 1.03 },
